@@ -4,7 +4,7 @@ const router = express.Router();
 // Require controller modules.
 const { 
     book_create_get, book_create_post, book_delete_get, book_delete_post,
-    book_update_get, book_update_post, book_detail, book_list
+    book_update_get, book_update_post, book_detail, book_list, index
 } = require("../controllers/bookController");
 const { 
     author_create_get, author_create_post, author_delete_get, author_delete_post,
@@ -22,7 +22,7 @@ const {
 /// BOOK ROUTES ///
 
 // GET catalog home page.
-router.get("/", book_controller.index);
+router.get("/", index);
 
 // GET request for creating a Book. NOTE This must come before routes that display Book (uses id).
 router.get("/book/create", book_create_get);
