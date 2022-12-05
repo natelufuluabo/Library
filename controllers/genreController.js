@@ -154,12 +154,12 @@ exports.genre_delete_post = (req, res) => {
         });
         return;
       }
-      // Author has no books. Delete object and redirect to the list of authors.
+      // Genre has no books. Delete object and redirect to the list of genres.
       Genre.findByIdAndRemove(req.body.genreid, (err) => {
         if (err) {
           return next(err);
         }
-        // Success - go to author list
+        // Success - go to genre list
         res.redirect("/catalog/genres");
       });
     }
