@@ -277,7 +277,7 @@ exports.author_update_post = [
         return next(err);
       }
 
-      // Successful: redirect to book detail page.
+      // Successful: redirect to author detail page.
       res.redirect(theauthor.url);
     });
   },
