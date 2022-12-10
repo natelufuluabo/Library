@@ -18,7 +18,10 @@ const CustomerSchema = new Schema({
       required: true, 
       maxLength: 100 
     },
-    date_of_birth: { type: Date },
+    date_of_birth: { 
+        type: Date,
+        required : true 
+    },
     emailAdress : {
         type : String,
         required : true
