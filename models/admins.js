@@ -1,13 +1,11 @@
 const mongoose = require("mongoose");
+const { DateTime } = require("luxon");
+const bcrypt = require('bcryptjs');
+const SALT_WORK_FACTOR = 10;
 
 const Schema = mongoose.Schema;
 
 const AdminSchema = new Schema({
-    type : {
-        type : String,
-        enum : ["Admin"],
-        required : true
-    },
     first_name : {
         type : String,
         required : true,
@@ -22,7 +20,7 @@ const AdminSchema = new Schema({
         type: Date,
         required : true 
     },
-    emailAdress : {
+    email_address : {
         type : String,
         required : true
     },
@@ -32,6 +30,10 @@ const AdminSchema = new Schema({
         maxLength : 16,
         required : true
     }
+});
+
+AdminSchema.virtual("date_of_birth_yyyy_mm_dd").get(function () {
+    return DateTime.fromJSDate(this.date_of_birth).toISODate(); // format 'YYYY-MM-DD'
 });
 
 AdminSchema.pre('save', function(next) {

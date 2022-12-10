@@ -19,12 +19,15 @@ const {
     bookinstance_update_get, bookinstance_update_post, bookinstance_detail, bookinstance_list
 } = require("../controllers/bookinstanceController");
 
-const { sign_up_get, log_in_get } = require("../Authentication/adminsAuthController");
+const { sign_up_get, sign_up_post, log_in_get } = require("../Authentication/adminsAuthController");
 
 /// AUTH ROUTES ///
 
 // GET request for creating admin
 router.get("/sign-up", sign_up_get);
+
+// POST request to create admin
+router.post("/sign-up", sign_up_post);
 
 // GET request for loging in admin
 router.get("/log-in", log_in_get);
