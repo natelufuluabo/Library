@@ -5,8 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const catalogRouter = require("./routes/catalog"); //Import routes for "catalog" area of site
+const publicRouter = require('./routes/public');
+const adminsRouter = require("./routes/admins");
 
 const app = express();
 
@@ -29,8 +29,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use("/catalog", catalogRouter); // Add catalog routes to middleware chain.
+app.use('/public', publicRouter);
+app.use('/admins', adminsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
