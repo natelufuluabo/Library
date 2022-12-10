@@ -26,7 +26,7 @@ exports.index = (req, res) => {
       },
     },
     (err, results) => {
-      res.render("index", {
+      res.render("index_admins", {
         title: "Local Library Home",
         error: err,
         data: results,

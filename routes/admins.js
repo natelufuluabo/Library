@@ -19,9 +19,19 @@ const {
     bookinstance_update_get, bookinstance_update_post, bookinstance_detail, bookinstance_list
 } = require("../controllers/bookinstanceController");
 
+const { sign_up_get, log_in_get } = require("../Authentication/adminsAuthController");
+
+/// AUTH ROUTES ///
+
+// GET request for creating admin
+router.get("/sign-up", sign_up_get);
+
+// GET request for loging in admin
+router.get("/log-in", log_in_get);
+
 /// BOOK ROUTES ///
 
-// GET catalog home page.
+// GET home page.
 router.get("/", index);
 
 // GET request for creating a Book. NOTE This must come before routes that display Book (uses id).
