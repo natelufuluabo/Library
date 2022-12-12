@@ -51,6 +51,7 @@ exports.bookinstance_create_get = (req, res, next) => {
     res.render("bookinstance_form", {
       title: "Create BookInstance",
       book_list: books,
+      user: req.user
     });
   });
 };

@@ -30,6 +30,7 @@ exports.index = (req, res) => {
         title: "Local Library Home",
         error: err,
         data: results,
+        user: req.user
       });
     }
   );
@@ -103,6 +104,7 @@ exports.book_create_get = (req, res, next) => {
         title: "Create Book",
         authors: results.authors,
         genres: results.genres,
+        user: req.user
       });
     }
   );
