@@ -5,13 +5,14 @@ const bcrypt = require('bcryptjs');
 const Admin = require("../models/admins");
 const { body, validationResult } = require("express-validator");
 
-passport.use(new LocalStrategy((username, password, done) => {
-    User.findOne({ username: username }, (err, admin) => {
+passport.use(new LocalStrategy((email_address, password, done) => {
+    Admin.findOne({ email_address: email_address }, (err, admin) => {
       if (err) { 
         return done(err);
       }
       if (!admin) {
-        return done(null, false, { message: "Incorrect username" });
+        console.log("Incorrect email address")
+        return done(null, false, { message: "Incorrect email address" });
       }
       bcrypt.compare(password, admin.password, (err, res) => {
           if (res) {
@@ -19,6 +20,7 @@ passport.use(new LocalStrategy((username, password, done) => {
             return done(null, admin)
           } else {
             // passwords do not match!
+            console.log("Incorrect password")
             return done(null, false, { message: "Incorrect password" })
           }
       });
@@ -112,3 +114,47 @@ exports.sign_up_post = [
 exports.log_in_get = (req, res, next) => {
     res.render("admins_log_in_form", { title : "Admin Log In" });
 };
+
+// Handle Admin log in on POST.
+// exports.log_in_post = [
+//   // Validate and sanitize fields.
+//   body("email_address")
+//     .trim()
+//     .isEmail()
+//     .escape()
+//     .withMessage("Invalid email address"),
+//   body("password")
+//     .trim()
+//     .isLength({ min : 8, max : 16 })
+//     .escape()
+//     .withMessage("Password must have at least 8 characters and a maximum of 16 characters")
+//     .matches('[0-9]').withMessage('Password must contain a number')
+//     .matches('[a-z]').withMessage('Password must contain an lowercase letter')
+//     .matches('[A-Z]').withMessage('Password must contain an uppercase letter'),
+
+//   // Process request after validation and sanitization.
+//   (req, res, next) => {
+//     // Extract the validation errors from a request.
+//     const errors = validationResult(req);
+
+//     if (!errors.isEmpty()) {
+//       // There are errors. Render form again with sanitized values/errors messages.
+//       res.render("admins_log_in_form", {
+//         title: "Admin Log In",
+//         admin: req.body,
+//         errors: errors.array(),
+//       });
+//       return;
+//     }
+//     // Data from form is valid.
+//     // Log in admin
+//     passport.authenticate("local", {
+//       successRedirect: "/admins",
+//       failureRedirect: "/admins/log-in"
+//     })
+//   }
+// ];
+exports.log_in_post = passport.authenticate("local", {
+  successRedirect: "/admins",
+  failureRedirect: "/admins/log-in"
+});

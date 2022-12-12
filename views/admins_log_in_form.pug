@@ -2,3 +2,16 @@ extends layout_admins
 
 block content
   h1= title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='email_address') Email Address:
+      input#email_address.form-control(type='email' name='email_address' value=(undefined===admin ? '' : admin.email_address) )
+    div.form-group
+      label(for='password') Password:
+      input#password.form-control(type='password' name='password' value=(undefined===admin ? '' : admin.password) )
+    button.btn.btn-primary(type='submit') Submit
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

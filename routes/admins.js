@@ -19,7 +19,7 @@ const {
     bookinstance_update_get, bookinstance_update_post, bookinstance_detail, bookinstance_list
 } = require("../controllers/bookinstanceController");
 
-const { sign_up_get, sign_up_post, log_in_get } = require("../Authentication/adminsAuthController");
+const { sign_up_get, sign_up_post, log_in_get, log_in_post } = require("../Authentication/adminsAuthController");
 
 /// AUTH ROUTES ///
 
@@ -31,6 +31,9 @@ router.post("/sign-up", sign_up_post);
 
 // GET request for loging in admin
 router.get("/log-in", log_in_get);
+
+// POST request for loging in admin
+router.post("/log-in", log_in_post);
 
 /// BOOK ROUTES ///
 
