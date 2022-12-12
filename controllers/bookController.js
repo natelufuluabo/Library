@@ -104,6 +104,7 @@ exports.book_create_get = (req, res, next) => {
         title: "Create Book",
         authors: results.authors,
         genres: results.genres,
+        headline : "Please log in to create book",
         user: req.user
       });
     }
@@ -222,6 +223,7 @@ exports.book_delete_get = (req, res) => {
         title: "Delete Book",
         book: results.book,
         bookinstance_books: results.bookinstances_books,
+        user: req.user
       });
     }
   );
@@ -306,6 +308,8 @@ exports.book_update_get = (req, res, next) => {
         authors: results.authors,
         genres: results.genres,
         book: results.book,
+        headline : "Please log in to update book",
+        user: req.user
       });
     }
   );

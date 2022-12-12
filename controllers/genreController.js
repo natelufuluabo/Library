@@ -124,6 +124,7 @@ exports.genre_delete_get = (req, res) => {
         title: "Delete Genre",
         genre: results.genre,
         genre_books: results.genres_books,
+        user: req.user
       });
     }
   );

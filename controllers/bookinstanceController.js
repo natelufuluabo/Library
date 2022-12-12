@@ -51,6 +51,7 @@ exports.bookinstance_create_get = (req, res, next) => {
     res.render("bookinstance_form", {
       title: "Create BookInstance",
       book_list: books,
+      headline : "Please log in to create book copy",
       user: req.user
     });
   });
@@ -131,7 +132,8 @@ exports.bookinstance_delete_get = (req, res) => {
       // Successful, so render.
       res.render("bookinstance_delete", {
         title: "Delete Book Instance",
-        bookinstance : results.bookinstance
+        bookinstance : results.bookinstance,
+        user: req.user
       });
     }
   );
@@ -189,7 +191,9 @@ exports.bookinstance_update_get = (req, res) => {
       res.render("bookinstance_form", {
         title : "Update BookInstance",
         book_list: results.books,
-        bookinstance : results.bookinstance
+        bookinstance : results.bookinstance,
+        headline : "Please log in to update book copy",
+        user: req.user
       });
     }
   )

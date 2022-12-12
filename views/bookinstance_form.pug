@@ -5,7 +5,7 @@ block content
 
   if !user 
     div 
-      p Please log in to create book copy 
+      p=headline 
       a(href="/admins/log-in") Log In
   else
     form(method='POST' action='')

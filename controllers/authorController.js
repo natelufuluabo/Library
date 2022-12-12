@@ -53,7 +53,7 @@ exports.author_detail = (req, res, next) => {
 
 // Display Author create form on GET.
 exports.author_create_get = (req, res, next) => {
-  res.render("author_form", { title: "Create Author", user: req.user });
+  res.render("author_form", { title: "Create Author", headline : "Please log in to create author", user: req.user });
 };
 
 // Handle Author create on POST.
@@ -138,6 +138,7 @@ exports.author_delete_get = (req, res, next) => {
         title: "Delete Author",
         author: results.author,
         author_books: results.authors_books,
+        user: req.user
       });
     }
   );
@@ -199,7 +200,9 @@ exports.author_update_get = (req, res) => {
       // Success
       res.render("author_form", {
         title : "Update Author",
-        author : results.author
+        author : results.author,
+        headline : "Please log in to update author",
+        user: req.user
       });
     }
   );

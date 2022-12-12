@@ -2,10 +2,16 @@ extends layout_admins
 
 block content
     h1 #{title}: #{bookinstance.id}
-    p Do you really want to delete this Book Instance?
 
-    form(method='POST' action='')
-      div.form-group
-        input#bookinstanceid.form-control(type='hidden',name='bookinstanceid', required='true', value=bookinstance._id )
+    if !user 
+      div 
+        p Please log in to delete book copy 
+        a(href="/admins/log-in") Log In
+    else 
+      p Do you really want to delete this Book Instance?
 
-      button.btn.btn-primary(type='submit') Delete
+      form(method='POST' action='')
+        div.form-group
+          input#bookinstanceid.form-control(type='hidden',name='bookinstanceid', required='true', value=bookinstance._id )
+
+        button.btn.btn-primary(type='submit') Delete
