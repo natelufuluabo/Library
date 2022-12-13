@@ -1,0 +1,11 @@
+extends layout_public
+
+block content
+  h1= title
+
+  ul
+    each genre in genre_list
+      li
+        a(href=genre.public_url) #{genre.name}
+    else
+      li There are no genres.
