@@ -5,19 +5,19 @@ const bcrypt = require('bcryptjs');
 const Admin = require("../models/admins");
 const { body, validationResult } = require("express-validator");
 
-passport.use(new LocalStrategy((email_address, password, done) => {
-    Admin.findOne({ email_address: email_address }, (err, admin) => {
+passport.use(new LocalStrategy((username, password, done) => {
+    Admin.findOne({ username: username }, (err, user) => {
       if (err) { 
         return done(err);
       }
-      if (!admin) {
+      if (!user) {
         console.log("Incorrect email address")
         return done(null, false, { message: "Incorrect email address" });
       }
-      bcrypt.compare(password, admin.password, (err, res) => {
+      bcrypt.compare(password, user.password, (err, res) => {
           if (res) {
             // passwords match! log user in
-            return done(null, admin)
+            return done(null, user)
           } else {
             // passwords do not match!
             console.log("Incorrect password")
@@ -28,13 +28,13 @@ passport.use(new LocalStrategy((email_address, password, done) => {
   })
 );
 
-passport.serializeUser(function(admin, done) {
-    done(null, admin.id);
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
 });
   
 passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, admin) {
-      done(err, admin);
+    Admin.findById(id, function(err, user) {
+      done(err, user);
     });
 });
 

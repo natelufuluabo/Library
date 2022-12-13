@@ -36,6 +36,10 @@ AdminSchema.virtual("date_of_birth_yyyy_mm_dd").get(function () {
     return DateTime.fromJSDate(this.date_of_birth).toISODate(); // format 'YYYY-MM-DD'
 });
 
+AdminSchema.virtual("username").get(function () {
+    return this.email_address;
+});
+
 AdminSchema.pre('save', function(next) {
     const admin = this;
 
