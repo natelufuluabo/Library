@@ -3,7 +3,7 @@ var router = express.Router();
 
 // Require controller modules.
 const { book_detail_public, book_list_public } = require("../controllers/bookController");
-const { author_detail, author_list } = require("../controllers/authorController");
+const { author_detail_public, author_list_public } = require("../controllers/authorController");
 const { genre_detail, genre_list } = require("../controllers/genreController");
 
 /* GET home page. */
@@ -20,5 +20,13 @@ router.get("/book/:id", book_detail_public);
 
 // GET request for list of all Book items.
 router.get("/books", book_list_public);
+
+/// AUTHOR ROUTES ///
+
+// GET request for one Author.
+router.get("/author/:id", author_detail_public);
+
+// GET request for list of all Authors.
+router.get("/authors", author_list_public);
 
 module.exports = router;
