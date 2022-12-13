@@ -50,6 +50,19 @@ exports.book_list = function (req, res, next) {
     });
 };
 
+exports.book_list_public = function (req, res, next) {
+  Book.find({}, "title author")
+    .sort({ title: 1 })
+    .populate("author")
+    .exec(function (err, list_books) {
+      if (err) {
+        return next(err);
+      }
+      //Successful, so render
+      res.render("book_list_public", { title: "Book List", book_list: list_books });
+    });
+};
+
 // Display detail page for a specific book.
 exports.book_detail = (req, res, next) => {
   async.parallel(
@@ -76,6 +89,39 @@ exports.book_detail = (req, res, next) => {
       }
       // Successful, so render.
       res.render("book_detail", {
+        title: results.book.title,
+        book: results.book,
+        book_instances: results.book_instance,
+      });
+    }
+  );
+};
+
+exports.book_detail_public = (req, res, next) => {
+  async.parallel(
+    {
+      book(callback) {
+        Book.findById(req.params.id)
+          .populate("author")
+          .populate("genre")
+          .exec(callback);
+      },
+      book_instance(callback) {
+        BookInstance.find({ book: req.params.id }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        return next(err);
+      }
+      if (results.book == null) {
+        // No results.
+        const err = new Error("Book not found");
+        err.status = 404;
+        return next(err);
+      }
+      // Successful, so render.
+      res.render("book_detail_public", {
         title: results.book.title,
         book: results.book,
         book_instances: results.book_instance,

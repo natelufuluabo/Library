@@ -15,6 +15,11 @@ const GenreSchema = new Schema({
 GenreSchema.virtual("url").get(function () {
     return `/admins/genre/${this._id}`;
 });
+
+// Virtual for genre's URL
+GenreSchema.virtual("public_url").get(function () {
+    return `/public/genre/${this._id}`;
+});
   
 // Export model
 module.exports = mongoose.model("Genre", GenreSchema);

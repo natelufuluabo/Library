@@ -15,5 +15,10 @@ BookSchema.virtual("url").get(function () {
   return `/admins/book/${this._id}`;
 });
 
+// Virtual for book's URL
+BookSchema.virtual("public_url").get(function () {
+  return `/public/book/${this._id}`;
+});
+
 // Export model
 module.exports = mongoose.model("Book", BookSchema);
