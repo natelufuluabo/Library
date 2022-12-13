@@ -38,9 +38,9 @@ html(lang='en')
                 hr
               if user 
                 li 
-                  a(href='')= user.first_name + user.family_name 
+                  a(href='')= user.first_name
                 li 
-                  a(href='') Log out
+                  a(href='/admins/log-out') Log out
               else
                 li 
                   a(href='/admins/sign-up') Sign Up
