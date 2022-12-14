@@ -19,7 +19,7 @@ const {
     bookinstance_update_get, bookinstance_update_post, bookinstance_detail, bookinstance_list
 } = require("../controllers/bookinstanceController");
 
-const { sign_up_get, sign_up_post, log_in_get, log_in_post, log_out } = require("../Authentication/adminsAuthController");
+const { sign_up_get, sign_up_post, log_in_get, log_in_post, log_out } = require("../authentication/adminsAuthController");
 
 /// AUTH ROUTES ///
 
