@@ -17,6 +17,7 @@ passport.use(new LocalStrategy((username, password, done) => {
       bcrypt.compare(password, user.password, (err, res) => {
           if (res) {
             // passwords match! log user in
+            console.log('Logged in');
             return done(null, user)
           } else {
             // passwords do not match!
@@ -94,7 +95,7 @@ exports.sign_up_post = [
     }
     // Data from form is valid.
 
-    // Create an Author object with escaped and trimmed data.
+    // Create an Admin object with escaped and trimmed data.
     const admin = new Admin({
       first_name: req.body.first_name,
       family_name: req.body.family_name,

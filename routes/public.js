@@ -28,7 +28,8 @@ router.get("/log-out", log_out);
 /* GET home page. */
 router.get('/', (req, res, next) => {
   res.render("index_public", {
-    title: "Local Library Home"
+    title: "Local Library Home",
+    user: req.user
   })
 });
 

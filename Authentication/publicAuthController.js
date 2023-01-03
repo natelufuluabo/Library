@@ -38,12 +38,12 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
-// Display Admin sign up form on GET.
+// Display customer sign up form on GET.
 exports.sign_up_get = (req, res, next) => {
     res.render("public_sign_up_form", { title : "Sign Up" });
 };
 
-// Handle admin create on POST.
+// Handle customer create on POST.
 exports.sign_up_post = [
   // Validate and sanitize fields.
   body("first_name")
@@ -94,7 +94,7 @@ exports.sign_up_post = [
     }
     // Data from form is valid.
 
-    // Create an Author object with escaped and trimmed data.
+    // Create an customer object with escaped and trimmed data.
     const customer = new Customer({
       first_name: req.body.first_name,
       family_name: req.body.family_name,
@@ -110,18 +110,18 @@ exports.sign_up_post = [
   }
 ];
 
-// Display Admin log in form on GET.
+// Display customer log in form on GET.
 exports.log_in_get = (req, res, next) => {
     res.render("public_log_in_form", { title : "Log In" });
 };
 
-// Handle Admin log in on POST.
+// Handle customer log in on POST.
 exports.log_in_post = passport.authenticate("local", {
   successRedirect: "/public",
   failureRedirect: "/public/log-in"
 });
 
-//  Handle Admin log out on GET.
+//  Handle customer log out on GET.
 exports.log_out = (req, res, next) => {
   req.logout(function (err) {
     if (err) {
